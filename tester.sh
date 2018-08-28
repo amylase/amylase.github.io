@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-python -m SimpleHTTPServer 9999
+python2 -m SimpleHTTPServer 9999
