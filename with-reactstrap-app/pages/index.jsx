@@ -57,7 +57,7 @@ export default function Home() {
             </Row>
 
             <footer className="cntr-footer">
-                © 2020 Shunsuke Ohashi (amylase)
+                © {new Date().getFullYear()} Shunsuke Ohashi (amylase)
             </footer>
         </Container>
     )
