@@ -28,3 +28,11 @@
 .fa-link {
   height: 48px;
 }
+
+a {
+  color: gray;
+}
+
+.old-top-link {
+  font-size: smaller;
+}

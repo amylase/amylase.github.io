@@ -21,9 +21,8 @@ export default function Home() {
                     shigure-hash.com
                 </h1>
                 <Container>
-                    <Row>
-                        <img className="mx-auto d-block"
-                             src="http://www.gravatar.com/avatar/dca82b4f824a231bbe37b7482f903493?s=256" alt="Avatar"/>
+                    <Row className="justify-content-center">
+                        <img src="https://www.gravatar.com/avatar/dca82b4f824a231bbe37b7482f903493?s=256" alt="Avatar"/>
                     </Row>
                     <Row className="mt-2 justify-content-center">
                         <div className="m-2">
@@ -46,13 +45,20 @@ export default function Home() {
                                                                                               icon={faBook}/></a>
                         </div>
                     </Row>
-
+                    <Row className="mt-2 justify-content-center">
+                        <div className="m-2">
+                            <a href="https://codeforces.com/profile/amylase">Codeforces</a>
+                        </div>
+                        <div className="m-2">
+                            <a href="https://atcoder.jp/users/amylase">AtCoder</a>
+                        </div>
+                    </Row>
                 </Container>
             </Container>
 
             <Row className="justify-content-end">
                 <Col xs={3}>
-                    <Button color="link" href="/old_index.html">Go to old top page</Button>
+                    <a className="old-top-link" href="/old_index.html">Go to old top page</a>
                 </Col>
             </Row>
 
