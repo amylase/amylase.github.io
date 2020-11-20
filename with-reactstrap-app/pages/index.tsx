@@ -1,25 +1,13 @@
-import Head from 'next/head'
-import {
-    Container,
-    Row,
-    Col,
-    Button
-} from 'reactstrap'
+import {Col, Container, Row} from 'reactstrap'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faTwitter, faGithub, faLinkedin, faFacebook} from "@fortawesome/free-brands-svg-icons";
+import {faFacebook, faGithub, faLinkedin, faTwitter} from "@fortawesome/free-brands-svg-icons";
 import {faBook} from "@fortawesome/free-solid-svg-icons";
+import BasePage from "../components/basePage";
 
 export default function Home() {
     return (
-        <Container className="md-container">
-            <Head>
-                <title>shigure-hash.com</title>
-                <link rel="icon" href="/favicon-32x32.png"/>
-            </Head>
+        <BasePage title="shigure-hash.com">
             <Container>
-                <h1>
-                    shigure-hash.com
-                </h1>
                 <Container>
                     <Row className="justify-content-center">
                         <img src="https://www.gravatar.com/avatar/dca82b4f824a231bbe37b7482f903493?s=256" alt="Avatar"/>
@@ -47,10 +35,10 @@ export default function Home() {
                     </Row>
                     <Row className="mt-2 justify-content-center">
                         <div className="m-2">
-                            <a href="https://codeforces.com/profile/amylase">Codeforces</a>
+                            <a href="https://codeforces.com/profile/amylase" className="contest-link">Codeforces</a>
                         </div>
                         <div className="m-2">
-                            <a href="https://atcoder.jp/users/amylase">AtCoder</a>
+                            <a href="https://atcoder.jp/users/amylase" className="contest-link">AtCoder</a>
                         </div>
                     </Row>
                 </Container>
@@ -61,10 +49,6 @@ export default function Home() {
                     <a className="old-top-link" href="/old_index.html">Go to old top page</a>
                 </Col>
             </Row>
-
-            <footer className="cntr-footer">
-                © {new Date().getFullYear()} Shunsuke Ohashi (amylase)
-            </footer>
-        </Container>
+        </BasePage>
     )
 }

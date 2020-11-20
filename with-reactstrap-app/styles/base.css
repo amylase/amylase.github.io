@@ -6,11 +6,6 @@
   padding-top: 2rem;
 }
 
-.sml-card {
-  width: 22rem;
-  margin: 1rem 0;
-}
-
 .cntr-footer {
   height: 80px;
   margin-top: 20px;
@@ -20,19 +15,21 @@
   border-top: 1px solid #ccc;
 }
 
-.sml-logo {
-  height: 1em;
-  margin-left: 10px;
-}
-
 .fa-link {
-  height: 48px;
+    height: 48px;
+    color: gray;
 }
 
-a {
-  color: gray;
+.contest-link {
+    color: gray;
 }
 
 .old-top-link {
-  font-size: smaller;
+    font-size: smaller;
+    color: gray;
+}
+
+.nav-link {
+    color: black;
+    font-size: x-large;
 }
