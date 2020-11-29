@@ -46,7 +46,7 @@ export default function Home() {
                         <b>Languages</b>: Japanese (Native), English (Business)
                     </div>
                     <div className="ml-5 mb-1">
-                        <b>Algorithm</b>: Codeforces International Master
+                        <b>Algorithm</b>: Codeforces Grandmaster
                     </div>
                     <div className="ml-5 mb-1">
                         <b>Statistics</b>: Having basic knowledge about statistical modeling and machine learning.
