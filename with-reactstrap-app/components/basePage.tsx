@@ -26,6 +26,9 @@ export default function BasePage(props: Props) {
                     <NavItem>
                         <Link href="/about" passHref={true}><NavLink className="nav-link">About</NavLink></Link>
                     </NavItem>
+                    <NavItem>
+                        <Link href="/software" passHref={true}><NavLink className="nav-link">Software</NavLink></Link>
+                    </NavItem>
                 </Nav>
             </div>
             {props.children}

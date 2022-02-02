@@ -38,6 +38,9 @@ export default function Home() {
                     <div className="ml-5 mb-1">
                         2nd place, ACM SIGPLAN ICFP Programming Contest 2018
                     </div>
+                    <div className="ml-5 mb-1">
+                        Judge's Prize, ACM SIGPLAN ICFP Programming Contest 2021
+                    </div>
                 </div>
 
                 <div className="mt-3">
@@ -50,13 +53,6 @@ export default function Home() {
                     </div>
                     <div className="ml-5 mb-1">
                         <b>Statistics</b>: Having basic knowledge about statistical modeling and machine learning.
-                    </div>
-                </div>
-
-                <div className="mt-3">
-                    <h3>Software</h3>
-                    <div className="ml-5 mb-1">
-                        <b>Difficulty Model for Competitive Programming</b>: Available on <a href="https://kenkoooo.com/atcoder">AtCoder Problems.</a>
                     </div>
                 </div>
             </Container>
