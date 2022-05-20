@@ -13,7 +13,7 @@ export default function Home() {
                 <div className="mt-3">
                     <h3>Professional Experiences</h3>
                     <div className="ml-5 mb-1">
-                        <b>2017/07 - Current</b>: Software Engineer, Indeed
+                        <b>2017/07 - 2022/05</b>: Software Engineer, Indeed
                     </div>
                     <div className="ml-5 mb-1">
                         <b>2015/04 - 2017/06</b>: Software Engineer, Recruit Holdings Co., Ltd.
