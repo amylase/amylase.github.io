@@ -19,16 +19,16 @@ export default function Home() {
                 <div className="mt-3">
                     <h3>FFXIV Crafter Solver</h3>
                     <div className="ml-5 mb-1">
-                        Available at <a href="/ffxiv-crafter-rust">here</a>.
+                        Available <a href="/ffxiv-crafter-rust">here</a>.
                     </div>
                     <div className="ml-5 mb-1">
-                        Solvers for in-game item crafting in Square Enix's <a href="https://na.finalfantasyxiv.com/">FINAL FANTASY XIV</a> MMORPG.
+                        Solvers for in-game item crafting of Square Enix's <a href="https://na.finalfantasyxiv.com/">FINAL FANTASY XIV</a> MMORPG.
                     </div>
                     <div className="ml-5 mb-1">
-                        Advisor: ID-DFS based algorithm to find the best action of a given state and stats. Aimed at expert recipes.
+                        Advisor: ID-DFS based algorithm to find the best action of a given state and stats. Designed for expert recipes.
                     </div>
                     <div className="ml-5 mb-1">
-                        Macro: Simulated annealing based algorithm to find the best macro that works under any status changes. Aimed at non-expert recipes.
+                        Macro: Simulated annealing based algorithm to find the best macro that works under any status changes. Designed for non-expert recipes.
                     </div>
                 </div>
 
