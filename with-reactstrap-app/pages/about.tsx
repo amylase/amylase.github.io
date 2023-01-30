@@ -13,6 +13,12 @@ export default function Home() {
                 <div className="mt-3">
                     <h3>Professional Experiences</h3>
                     <div className="ml-5 mb-1">
+                        <b>2023/01 -</b>: Software Engineer, Monoxer, inc.
+                    </div>
+                    <div className="ml-5 mb-1">
+                        <b>2022/10 -</b>: Software Engineer, Preferred Networks, inc.
+                    </div>
+                    <div className="ml-5 mb-1">
                         <b>2017/07 - 2022/05</b>: Software Engineer, Indeed
                     </div>
                     <div className="ml-5 mb-1">
@@ -46,13 +52,13 @@ export default function Home() {
                 <div className="mt-3">
                     <h3>Skills</h3>
                     <div className="ml-5 mb-1">
-                        <b>Languages</b>: Japanese (Native), English (Business)
+                        <b>Languages</b>: Japanese (Native), English (Business), Korean (Beginner)
                     </div>
                     <div className="ml-5 mb-1">
                         <b>Algorithm</b>: Codeforces Grandmaster
                     </div>
                     <div className="ml-5 mb-1">
-                        <b>Statistics</b>: Having basic knowledge about statistical modeling and machine learning.
+                        <b>Statistics</b>: Author of AtCoder Problem's difficulty estimator
                     </div>
                 </div>
             </Container>
