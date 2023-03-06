@@ -1,7 +1,7 @@
 name: Build
 
 on:
-  pull_rquest: {}
+  pull_request: {}
 
 jobs:
   build:
