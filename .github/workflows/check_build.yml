@@ -30,5 +30,4 @@ jobs:
         run: |
           cd with-reactstrap-app &&
           yarn install --frozen-lockfile &&
-          yarn build &&
-          yarn export
+          yarn build
