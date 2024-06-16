@@ -33,7 +33,7 @@ export default function BasePage(props: Props) {
             </div>
             {props.children}
             <footer className="cntr-footer">
-                © {new Date().getFullYear()} Shunsuke Ohashi (amylase)
+                © 2024 Shunsuke Ohashi (amylase)
             </footer>
         </Container>
     )
