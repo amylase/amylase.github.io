@@ -17,7 +17,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v2.1.2
         with:
-          node-version: '16.x'
+          node-version: '18.20.3'
 
       - name: Get yarn cache
         id: yarn-cache
@@ -36,7 +36,6 @@ jobs:
           cd with-reactstrap-app &&
           yarn install --frozen-lockfile &&
           yarn build &&
-          yarn export &&
           cp -r ./out/* ../publish/
 
       - name: Deploy
