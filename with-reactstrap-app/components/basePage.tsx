@@ -21,13 +21,13 @@ export default function BasePage(props: Props) {
                         <h1>shigure-hash.com</h1>
                     </NavItem>
                     <NavItem>
-                        <Link href="/" passHref={true}><NavLink className="nav-link">Home</NavLink></Link>
+                        <Link className="nav-link" href="/" passHref={true}>Home</Link>
                     </NavItem>
                     <NavItem>
-                        <Link href="/about" passHref={true}><NavLink className="nav-link">About</NavLink></Link>
+                        <Link className="nav-link" href="/about" passHref={true}>About</Link>
                     </NavItem>
                     <NavItem>
-                        <Link href="/software" passHref={true}><NavLink className="nav-link">Software</NavLink></Link>
+                        <Link className="nav-link" href="/software" passHref={true}>Software</Link>
                     </NavItem>
                 </Nav>
             </div>
