@@ -40,6 +40,9 @@ export default function Home() {
                         <div className="m-2">
                             <a href="https://atcoder.jp/users/amylase" className="contest-link">AtCoder</a>
                         </div>
+                        <div className="m-2">
+                            <a href="https://vaddict.b35.jp/user.php?player_id=SV-1369-5556" className="contest-link">SDVX</a>
+                        </div>
                     </Row>
                 </Container>
             </Container>

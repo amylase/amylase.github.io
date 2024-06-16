@@ -13,16 +13,13 @@ export default function Home() {
                 <div className="mt-3">
                     <h3>Professional Experiences</h3>
                     <div className="ml-5 mb-1">
-                        <b>2023/01 -</b>: Software Engineer, Monoxer, inc.
+                        <b>January 2023 -</b>: Software Engineer, Monoxer
                     </div>
                     <div className="ml-5 mb-1">
-                        <b>2022/10 -</b>: Software Engineer, Preferred Networks, inc.
+                        <b>October 2022 - March 2023</b>: Software Engineer, Preferred Networks
                     </div>
                     <div className="ml-5 mb-1">
-                        <b>2017/07 - 2022/05</b>: Software Engineer, Indeed
-                    </div>
-                    <div className="ml-5 mb-1">
-                        <b>2015/04 - 2017/06</b>: Software Engineer, Recruit Holdings Co., Ltd.
+                        <b>April 2015 - May 2022</b>: Software Engineer, Indeed
                     </div>
                 </div>
 
