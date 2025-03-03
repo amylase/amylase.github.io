@@ -26,10 +26,10 @@ export default function Home() {
                 <div className="mt-3">
                     <h3>Education</h3>
                     <div className="ml-5 mb-1">
-                        <b>2015/03</b>: Master of Science in Computer Science, The University of Tokyo
+                        <b>April 2013 - March 2015</b>: Master of Science in Computer Science, The University of Tokyo
                     </div>
                     <div className="ml-5 mb-1">
-                        <b>2013/03</b>: Bachelor of Science in Information Science, The University of Tokyo
+                        <b>April 2009 - March 2013</b>: Bachelor of Science in Information Science, The University of Tokyo
                     </div>
                 </div>
 
@@ -43,6 +43,9 @@ export default function Home() {
                     </div>
                     <div className="ml-5 mb-1">
                         Judge's Prize, ACM SIGPLAN ICFP Programming Contest 2021
+                    </div>
+                    <div className="ml-5 mb-1">
+                        Winner of the lightning division, ACM SIGPLAN ICFP Programming Contest 2024
                     </div>
                 </div>
 
