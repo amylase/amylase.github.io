@@ -9,40 +9,40 @@ export default function Home() {
         <BasePage title="shigure-hash.com">
             <Container>
                 <Container>
-                    <Row className="justify-content-center">
-                        <img src="https://www.gravatar.com/avatar/dca82b4f824a231bbe37b7482f903493?s=256" alt="Avatar"/>
+                    <Row className="m-4 justify-content-center">
+                        <Col xs={12} className="text-center">
+                            <img src="https://www.gravatar.com/avatar/dca82b4f824a231bbe37b7482f903493?s=256" alt="Avatar"/>
+                        </Col>
                     </Row>
-                    <Row className="mt-2 justify-content-center">
-                        <div className="m-2">
+                    <Row className="m-4 justify-content-center">
+                        <Col className="m-1" xs={1}>
                             <a href="https://twitter.com/pepsin_amylase"><FontAwesomeIcon className="fa-link"
                                                                                           icon={faTwitter}/></a>
-                        </div>
-                        <div className="m-2">
+                        </Col>
+                        <Col className="m-1" xs={1}>
                             <a href="https://github.com/amylase"><FontAwesomeIcon className="fa-link" icon={faGithub}/></a>
-                        </div>
-                        <div className="m-2">
+                        </Col>
+                        <Col className="m-1" xs={1}>
                             <a href="https://www.facebook.com/ohashi.shunsuke.5"><FontAwesomeIcon
                                 className="fa-link" icon={faFacebook}/></a>
-                        </div>
-                        <div className="m-2">
+                        </Col>
+                        <Col className="m-1" xs={1}>
                             <a href="https://www.linkedin.com/in/shunsuke-ohashi-65b873144/"><FontAwesomeIcon
                                 className="fa-link" icon={faLinkedin}/></a>
-                        </div>
-                        <div className="m-2">
+                        </Col>
+                        <Col className="m-1" xs={1}>
                             <a href="https://pepsin-amylase.hatenablog.com/"><FontAwesomeIcon className="fa-link"
                                                                                               icon={faBook}/></a>
-                        </div>
+                        </Col>
                     </Row>
-                    <Row className="mt-2 justify-content-center">
-                        <div className="m-2">
+                    <Row className="mt-4 justify-content-center">
+                        <Container className='text-center'>
                             <a href="https://codeforces.com/profile/amylase" className="contest-link">Codeforces</a>
-                        </div>
-                        <div className="m-2">
+                            {" "}
                             <a href="https://atcoder.jp/users/amylase" className="contest-link">AtCoder</a>
-                        </div>
-                        <div className="m-2">
+                            {" "}
                             <a href="https://vaddict.b35.jp/user.php?player_id=SV-1369-5556" className="contest-link">SDVX</a>
-                        </div>
+                        </Container>
                     </Row>
                 </Container>
             </Container>

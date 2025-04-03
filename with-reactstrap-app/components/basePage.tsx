@@ -33,7 +33,7 @@ export default function BasePage(props: Props) {
             </div>
             {props.children}
             <footer className="cntr-footer">
-                © 2024 Shunsuke Ohashi (amylase)
+                © 2025 Shunsuke Ohashi (amylase)
             </footer>
         </Container>
     )
