@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>グリッド描画</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 20px;
+        }
+        .main-container {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 20px;
+        }
+        .controls {
+            flex-shrink: 0;
+            min-width: 250px;
+        }
+        .algorithm-overview {
+            flex: 1;
+            background-color: #f5f5f5;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
+        .algorithm-overview h3 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            color: #333;
+            font-size: 16px;
+        }
+        .algorithm-overview p {
+            margin: 0;
+            line-height: 1.5;
+            color: #555;
+            font-size: 14px;
+        }
+        .control-group {
+            margin-bottom: 10px;
+        }
+        label {
+            display: inline-block;
+            width: 120px;
+        }
+        canvas {
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <div class="controls">
+            <div class="control-group">
+                <label for="angle">角度: <span id="angleValue">4</span>°</label>
+                <input type="range" id="angle" min="0" max="90" value="4">
+            </div>
+            <div class="control-group">
+                <label for="rows">縦 (n): <span id="rowsValue">20</span></label>
+                <input type="range" id="rows" min="1" max="50" value="20">
+            </div>
+            <div class="control-group">
+                <label for="cols">横 (m): <span id="colsValue">100</span></label>
+                <input type="range" id="cols" min="1" max="400" value="100">
+            </div>
+        </div>
+        <div class="algorithm-overview">
+            <h3>アルゴリズムの概要</h3>
+            <p>折れ曲がるところでのなす角が一定以下になるように、曲線の下側の面積を最大化。最適化は動的計画法による（クソ遅いので前処理必須？）。</p>
+        </div>
+    </div>
+    <canvas id="grid"></canvas>
+
+    <script>
+        const canvas = document.getElementById('grid');
+        const ctx = canvas.getContext('2d');
+        const CELL_SIZE = 5; // グリッドのセルサイズ（ピクセル）
+        const MARGIN = 20; // グリッド周囲の余白（ピクセル）
+
+        // スライダーと表示値の要素を取得
+        const angleSlider = document.getElementById('angle');
+        const rowsSlider = document.getElementById('rows');
+        const colsSlider = document.getElementById('cols');
+        const angleValue = document.getElementById('angleValue');
+        const rowsValue = document.getElementById('rowsValue');
+        const colsValue = document.getElementById('colsValue');
+
+        // パラメータが変更されたときの処理
+        function onParamsChange() {
+            const angle = parseInt(angleSlider.value);
+            const rows = parseInt(rowsSlider.value);
+            const cols = parseInt(colsSlider.value);
+
+            // 表示値を更新
+            angleValue.textContent = angle;
+            rowsValue.textContent = rows;
+            colsValue.textContent = cols;
+
+            // キャンバスサイズを更新（余白を含む）
+            canvas.width = cols * CELL_SIZE + 2 * MARGIN;
+            canvas.height = rows * CELL_SIZE + 2 * MARGIN;
+
+            // グリッドを描画
+            drawGrid(rows, cols);
+            
+            // ここに折れ線を描画するロジックを追加予定
+            drawLine(angle, rows, cols);
+        }
+
+        // グリッドを描画する関数
+        function drawGrid(rows, cols) {
+            ctx.strokeStyle = '#cccccc';
+            ctx.lineWidth = 1;
+
+            // 縦線を描画
+            for (let x = 0; x <= cols; x++) {
+                ctx.beginPath();
+                ctx.moveTo(MARGIN + x * CELL_SIZE, MARGIN);
+                ctx.lineTo(MARGIN + x * CELL_SIZE, MARGIN + rows * CELL_SIZE);
+                ctx.stroke();
+            }
+
+            // 横線を描画
+            for (let y = 0; y <= rows; y++) {
+                ctx.beginPath();
+                ctx.moveTo(MARGIN, MARGIN + y * CELL_SIZE);
+                ctx.lineTo(MARGIN + cols * CELL_SIZE, MARGIN + y * CELL_SIZE);
+                ctx.stroke();
+            }
+        }
+
+        // パラメータから点のリストを計算する関数
+        function calculatePoints(angle, rows, cols) {
+
+            // 動的計画法で最適な折れ線を求める
+            const n = rows, m = cols;
+            const maxAngle = angle * Math.PI / 180; // ラジアンに変換
+            
+            // dp[i][j][pi][pj] = 最後の2点が(pi, pj) -> (i, j)の時の最小面積
+            // メモリ効率のため、Map を使用
+            const dp = new Map();
+            const parent = new Map();
+            
+            // キーを生成する関数
+            function getKey(i, j, pi, pj) {
+                return `${i},${j},${pi},${pj}`;
+            }
+            
+            // 2つのベクトルのなす角を計算
+            function getAngleBetweenVectors(v1, v2) {
+                const dot = v1.x * v2.x + v1.y * v2.y;
+                const norm1 = Math.sqrt(v1.x * v1.x + v1.y * v1.y);
+                const norm2 = Math.sqrt(v2.x * v2.x + v2.y * v2.y);
+                const cos = dot / (norm1 * norm2);
+                return Math.acos(Math.max(-1, Math.min(1, cos)));
+            }
+            
+            // 台形の面積を計算（線分(x1,y1)-(x2,y2)による）
+            function getTrapezoidArea(x1, y1, x2, y2) {
+                return 0.5 * Math.abs(x2 - x1) * (y1 + y2);
+            }
+            
+            // 初期化：(0,-1) -> (0,0)
+            dp.set(getKey(0, 0, 0, -1), 0);
+            
+            // 動的計画法
+            for (let i = 0; i <= n; i++) {
+                for (let j = 0; j <= m; j++) {
+                    
+                    for (let pi = 0; pi <= i; pi++) {
+                        for (let pj = -1; pj < j; pj++) {
+                            if (pi === i && pj === j) continue;
+                            
+                            const currentKey = getKey(i, j, pi, pj);
+                            if (!dp.has(currentKey)) continue;
+                            
+                            // 次の点を探す
+                            for (let ni = i; ni <= n; ni++) {
+                                for (let nj = j + 1; nj <= m; nj++) {
+
+                                    // 角度制約をチェック
+                                    const v1 = { x: pi - i, y: pj - j };
+                                    const v2 = { x: ni - i, y: nj - j };
+                                    
+                                    const angle = Math.PI - getAngleBetweenVectors(v1, v2);
+                                    if (angle > maxAngle) continue;
+                                    if (angle < 0) continue;
+                                    
+                                    // 面積を計算
+                                    const currentArea = dp.get(currentKey);
+                                    const additionalArea = getTrapezoidArea(j, i, nj, ni);
+                                    const newArea = currentArea + additionalArea;
+                                    
+                                    const nextKey = getKey(ni, nj, i, j);
+                                    if (!dp.has(nextKey) || dp.get(nextKey) > newArea) {
+                                        dp.set(nextKey, newArea);
+                                        parent.set(nextKey, { i, j, pi, pj });
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            
+            // 終点(n,m)での最小値を探す
+            let minArea = Infinity;
+            let bestLastKey = null;
+            
+            for (let pi = 0; pi <= n; pi++) {
+                for (let pj = 0; pj <= m; pj++) {
+                    const key = getKey(n, m, pi, pj);
+                    if (dp.has(key) && dp.get(key) < minArea) {
+                        minArea = dp.get(key);
+                        bestLastKey = key;
+                    }
+                }
+            }
+            
+            // 経路を復元
+            const path = [];
+            let currentKey = bestLastKey;
+            
+            while (currentKey && parent.has(currentKey)) {
+                const [i, j] = currentKey.split(',').map(Number);
+                path.unshift({ x: i, y: j });
+                
+                const parentInfo = parent.get(currentKey);
+                currentKey = getKey(parentInfo.i, parentInfo.j, parentInfo.pi, parentInfo.pj);
+            }
+            
+            // (0,0)を追加
+            if (path.length === 0 || path[0].x !== 0 || path[0].y !== 0) {
+                path.unshift({ x: 0, y: 0 });
+            }
+            
+            // 座標をピクセル座標に変換（余白とセルサイズを考慮）
+            return path.map(point => ({
+                x: MARGIN + point.y * CELL_SIZE,
+                y: MARGIN + point.x * CELL_SIZE // Y軸を反転
+            }));
+        }
+
+        // 点のリストを受け取って折れ線を描画する関数
+        function drawPolyline(points) {
+            if (points.length === 0) return;
+            
+            // 線分を描画
+            ctx.strokeStyle = '#ff0000';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(points[0].x, points[0].y);
+            
+            for (let i = 1; i < points.length; i++) {
+                ctx.lineTo(points[i].x, points[i].y);
+            }
+            ctx.stroke();
+            
+            // 端点を大きく描画（円で表示）
+            ctx.fillStyle = '#ff0000';
+            const pointRadius = 4; // 端点の半径
+            
+            for (let i = 0; i < points.length; i++) {
+                ctx.beginPath();
+                ctx.arc(points[i].x, points[i].y, pointRadius, 0, 2 * Math.PI);
+                ctx.fill();
+            }
+        }
+
+        // 折れ線を描画する関数（リファクタリング後）
+        function drawLine(angle, rows, cols) {
+            const points = calculatePoints(angle, rows, cols);
+            drawPolyline(points);
+        }
+
+        // イベントリスナーを設定
+        angleSlider.addEventListener('input', onParamsChange);
+        rowsSlider.addEventListener('input', onParamsChange);
+        colsSlider.addEventListener('input', onParamsChange);
+
+        // 初期描画
+        onParamsChange();
+    </script>
+</body>
+</html>
