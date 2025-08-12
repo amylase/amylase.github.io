@@ -159,6 +159,11 @@
             function getTrapezoidArea(x1, y1, x2, y2) {
                 return 0.5 * Math.abs(x2 - x1) * (y1 + y2);
             }
+
+            function gcd(a, b) {
+                if (b === 0) return a;
+                return gcd(b, a % b);
+            }
             
             // 初期化：(0,-1) -> (0,0)
             dp.set(getKey(0, 0, 0, -1), 0);
@@ -170,6 +175,9 @@
                     for (let pi = 0; pi <= i; pi++) {
                         for (let pj = -1; pj < j; pj++) {
                             if (pi === i && pj === j) continue;
+                            // (pi, pj) -> (i, j) が互いに素でないベクトルならスキップできる
+                            const v1 = { x: pi - i, y: pj - j };
+                            if (gcd(-v1.x, -v1.y) !== 1) continue;
                             
                             const currentKey = getKey(i, j, pi, pj);
                             if (!dp.has(currentKey)) continue;
@@ -178,10 +186,12 @@
                             for (let ni = i; ni <= n; ni++) {
                                 for (let nj = j + 1; nj <= m; nj++) {
 
-                                    // 角度制約をチェック
-                                    const v1 = { x: pi - i, y: pj - j };
                                     const v2 = { x: ni - i, y: nj - j };
+
+                                    // v2 が互いに素でないベクトルならスキップできる
+                                    if (gcd(v2.x, v2.y) !== 1) continue;
                                     
+                                    // 角度制約をチェック
                                     const angle = Math.PI - getAngleBetweenVectors(v1, v2);
                                     if (angle > maxAngle) continue;
                                     if (angle < 0) continue;
@@ -232,6 +242,22 @@
             // (0,0)を追加
             if (path.length === 0 || path[0].x !== 0 || path[0].y !== 0) {
                 path.unshift({ x: 0, y: 0 });
+            }
+
+            // 隣接する3点が一直線上にあるなら、真ん中の点を取り除く
+            // この処理ができなくなるまで繰り返す
+            let changed = true;
+            while (changed) {
+                changed = false;
+                for (let i = 1; i < path.length - 1; i++) {
+                    const v1 = { x: path[i].x - path[i - 1].x, y: path[i].y - path[i - 1].y };
+                    const v2 = { x: path[i + 1].x - path[i].x, y: path[i + 1].y - path[i].y };
+                    if (v1.x * v2.y === v1.y * v2.x) { 
+                        path.splice(i, 1);
+                        changed = true;
+                        break;
+                    }
+                }
             }
             
             // 座標をピクセル座標に変換（余白とセルサイズを考慮）
