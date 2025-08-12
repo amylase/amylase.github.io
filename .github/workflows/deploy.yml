@@ -14,6 +14,9 @@ jobs:
       - name: Copy old contents
         run: cp -r ./old_contents ./publish
 
+      - name: Copy static contents
+        run: cp -r static publish/
+
       - name: Setup Node
         uses: actions/setup-node@v2.1.2
         with:
